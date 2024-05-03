@@ -1,4 +1,4 @@
-package com.sbb;
+package com.sbs.sbb;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +9,6 @@ public class MainController {
     @GetMapping("/sbb")
     @ResponseBody
     public String index() {
-       return "방가방가!!!";
+       return "방가방가!!" ;
     }
 }
