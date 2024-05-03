@@ -19,7 +19,9 @@ public class Answer {
 
     private LocalDateTime createDate;
 
-    @ManyToOne // question 쓰려면 무조건 앞에 써줘야함
+    // Many = Answer ( 다수 : 1) , One = Question ( 1:1 )
+    // (필수)
+    @ManyToOne // 어쩔수 없이 question 쓰려면 무조건 앞에 써줘야함
     private Question question; // 어디 테이블에 있는지 표시 하는것.
     // private Integer questionId; 이거로도 대신 사용해도 됨.
 }
