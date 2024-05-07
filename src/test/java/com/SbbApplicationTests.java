@@ -13,6 +13,8 @@ class SbbApplicationTests {
 
 	@Autowired
 	private QuestionRepository questionRepository;
+	@Autowired
+	private AnswerRepository answerRepository;
 
 	@Test
 	void testJpa() {
@@ -27,5 +29,11 @@ class SbbApplicationTests {
 		q2.setContent("id는 자동으로 생성되나요?");
 		q2.setCreateDate(LocalDateTime.now());
 		this.questionRepository.save(q2);  // 두번째 질문 저장
+
+		Answer a1 = new Answer();
+
+		a1.setContent("그걸 제가 어떻게 아나요?");
+		a1.setCreateDate(LocalDateTime.now());
+		this.answerRepository.save(a1);
 	}
 }
