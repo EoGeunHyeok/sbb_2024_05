@@ -5,6 +5,7 @@
     <title>호올리</title>
 </head>
 <body>
+<h1 style="color:pink;">[[${questionList}]]</h1>
 <h2>질문 게시판</h2>
 
 <table border="1">
@@ -15,11 +16,12 @@
         <th>작성일시</th>
     </tr>
     </thead>
+
     <tbody>
-    <tr>
-        <td th:text="${questionList[1].id}"></td>
-        <td th:text="${questionList[1].subject}"></td>
-        <td th:text="${questionList[1].createDate}"></td>
+    <tr th:each="q : ${questionList}">
+        <td th:text="${q.id}"></td>
+        <td th:text="${q.subject}"></td>
+        <td th:text="${q.createDate}"></td>
     </tr>
     <tr>
         <td>[[${questionList[0].id}]]</td>
