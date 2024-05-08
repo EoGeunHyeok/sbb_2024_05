@@ -9,6 +9,12 @@ public class MainController {
     @GetMapping("/com/sbs/sbb")
     @ResponseBody
     public String index() {
-       return "방가방가!!" ;
+
+        return "방가방가!!" ;
+    }
+    @GetMapping("/")
+    public String root() {
+
+        return "redirect:/question/list" ;
     }
 }
