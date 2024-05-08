@@ -4,7 +4,17 @@
    <div th:text="${question.content}"></div>
 </h2>
 
-<form action="/question/createTemp" method="POST">
+<!--<form action="/question/createTemp" method="post">-->
+<!--   <div>-->
+<!--      <span>내용</span>-->
+<!--      <br>-->
+<!--      <textarea name="content" placeholder="내용" rows="5"></textarea>-->
+<!--   </div>-->
+
+<!--   <button type="submit">답변등록</button>-->
+<!--</form>-->
+
+<form th:action="@{|/answer/create/${question.id}|}" method="post">
    <div>
       <span>내용</span>
       <br>
@@ -13,3 +23,4 @@
 
    <button type="submit">답변등록</button>
 </form>
+
