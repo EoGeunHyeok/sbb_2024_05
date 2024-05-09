@@ -1,19 +1,74 @@
-<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 
-<h2>
-   <h3 th:text="${question.id}"></h3>
-   <div th:text="${question.subject}"></div>
-   <div th:text="${question.content}"></div>
-</h2>
-
-<h5 th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
-<div>
-   <ul>
-      <li th:each="answer : ${question.answerList}" th:text="${answer.content}"></li>
-   </ul>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+<div class="container my-3">
+    <table class="table">
+        <thead class="table-dark">
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="question, loop : ${questionList}">
+            <td th:text="${loop.count}"></td>
+            <td>
+                <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+            </td>
+            <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
-<!--<form action="/question/createTemp" method="post">-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<link rel="stylesheet" type="text/css" th:href="@{/style.css}">-->
+<!--<h2>-->
+<!--   <h3 th:text="${question.id}"></h3>-->
+<!--   <div th:text="${question.subject}"></div>-->
+<!--   <div th:text="${question.content}"></div>-->
+<!--</h2>-->
+
+<!--<h5 th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>-->
+<!--<div>-->
+<!--   <ul>-->
+<!--      <li th:each="answer : ${question.answerList}" th:text="${answer.content}"></li>-->
+<!--   </ul>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;<form action="/question/createTemp" method="post">&ndash;&gt;-->
+<!--&lt;!&ndash;   <div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <span>내용</span>&ndash;&gt;-->
+<!--&lt;!&ndash;      <br>&ndash;&gt;-->
+<!--&lt;!&ndash;      <textarea name="content" placeholder="내용" rows="5"></textarea>&ndash;&gt;-->
+<!--&lt;!&ndash;   </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;   <button type="submit">답변등록</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+
+<!--<form th:action="@{|/answer/create/${question.id}|}" method="post">-->
 <!--   <div>-->
 <!--      <span>내용</span>-->
 <!--      <br>-->
@@ -22,14 +77,3 @@
 
 <!--   <button type="submit">답변등록</button>-->
 <!--</form>-->
-
-<form th:action="@{|/answer/create/${question.id}|}" method="post">
-   <div>
-      <span>내용</span>
-      <br>
-      <textarea name="content" placeholder="내용" rows="5"></textarea>
-   </div>
-
-   <button type="submit">답변등록</button>
-</form>
-
