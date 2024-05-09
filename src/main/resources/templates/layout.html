@@ -1,0 +1,28 @@
+<!-- "!+tap" 하면 기본정보 불러오기 가능 -->
+
+<!doctype html>
+<html lang="ko">
+<head>
+<!--    Required mata tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!--    Bootstrap CSS-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+
+<!--    sbb CSS-->
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <title>토끼가 강한 이유</title>
+</head>
+<h1>토끼가 엄청 강한 이유</h1>
+<body>
+<!-- 기본 템플릿 안에 삽입될 내용 시작-->
+<th:block layout:fragment="content"></th:block>
+<!-- 기본 템플릿 안에 삽입될 내용  끝 -->
+</body>
+</html>
+
+
+
+
+<!--<meta http-equiv="X-UA-Compatible" content="ie=edge">-->
