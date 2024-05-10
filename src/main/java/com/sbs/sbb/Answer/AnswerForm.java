@@ -1,0 +1,15 @@
+package com.sbs.sbb.Answer;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class AnswerForm {
+
+    @NotBlank(message=" 내용을 적어달람! ")
+    @Size(max=200, message = "내용을 200자 이하로 입력해주세요.")
+    private String content;
+}

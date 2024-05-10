@@ -1,5 +1,6 @@
 package com.sbs.sbb.Question;
 
+import com.sbs.sbb.Answer.AnswerForm;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class QuestionController {
         return "question_list";
     }
     @GetMapping("/detail/{id}") // -> question이 접두어임
-    public String detail(Model model, @PathVariable("id") Integer id){
+    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm){
         Question q = this.questionService.getQuestion(id);
 
         model.addAttribute("question", q);
@@ -43,7 +44,7 @@ public class QuestionController {
 
     @PostMapping("/create")
        // QuestionForm 값을 바인딩 할 대 유효성 체크를 해람! -> DB에 올라가기 직전에
-        public String questionCreate(@Valid QuestionForm questionForm,  BindingResult bindingResult){
+        public String questionCreate(@Valid QuestionForm questionForm,  BindingResult bindingResult ){
         //public String questionCreate(@RequestParam(value="subject") String subject, @RequestParam(value="content") String content)
         if( bindingResult.hasErrors()){
             // question_form.html 실행
