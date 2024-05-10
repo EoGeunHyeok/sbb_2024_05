@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,9 +39,13 @@ public class QuestionController {
 
     @PostMapping("/create")
        // QuestionForm 값을 바인딩 할 대 유효성 체크를 해람! -> DB에 올라가기 직전에
-        public String questionCreate(@Valid QuestionForm questionForm){
+        public String questionCreate(@Valid QuestionForm questionForm,  BindingResult bindingResult){
         //public String questionCreate(@RequestParam(value="subject") String subject, @RequestParam(value="content") String content)
-
+        if( bindingResult.hasErrors()){
+            // question_form.html 실행
+            // 다시 작성하라는 의미로 응답에 폼을 넣어서 돌려보냄
+            return "question_form";
+        }
         Question q = this.questionService.create(questionForm.getSubject(), questionForm.getSubject());
 
         return "redirect:/question/list";
