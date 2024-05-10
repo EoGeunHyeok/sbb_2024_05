@@ -1,14 +1,17 @@
 package com.sbs.sbb.Question;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RequestMapping("/question") // 앞에 고정적으로 들어가는 단어를 이렇게 지정해주면 편함
 @Controller
 @RequiredArgsConstructor
+// @Validated 컨트롤러 부분에서는 생력 가능
 public class QuestionController {
    private final QuestionService questionService;
 
@@ -34,12 +37,11 @@ public class QuestionController {
     }
 
     @PostMapping("/create")
-    //public String questionCreate(@RequestParam(value="subject") String subject, @RequestParam(value="content") String content) {
-        public String questionCreate(QuestionForm questionForm){
-        String subject = questionForm.getSubject();
-        String content = questionForm.getSubject();
+       // QuestionForm 값을 바인딩 할 대 유효성 체크를 해람! -> DB에 올라가기 직전에
+        public String questionCreate(@Valid QuestionForm questionForm){
+        //public String questionCreate(@RequestParam(value="subject") String subject, @RequestParam(value="content") String content)
 
-        Question q = this.questionService.create(subject, content);
+        Question q = this.questionService.create(questionForm.getSubject(), questionForm.getSubject());
 
         return "redirect:/question/list";
 
