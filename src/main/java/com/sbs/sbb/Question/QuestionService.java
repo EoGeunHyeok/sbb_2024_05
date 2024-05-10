@@ -13,30 +13,28 @@ import java.util.Optional;
 public class QuestionService {
     private final QuestionRepository questionRepository;
 
-    public List<Question> getlist() {
+    public List<Question> getList() {
         return this.questionRepository.findAll();
     }
 
     public Question getQuestion(Integer id) {
-        Optional<Question> oq = questionRepository.findById(id);
+        Optional<Question> oq = this.questionRepository.findById(id);
 
-        // oq.isPresent() == false
+        // oq.isPersent() == false
         // !oq.isPresent()
-        if( oq.isEmpty()) throw new DataNotException("질문이 없는걸욤");
+        // oq.isEmpty()
+        if ( oq.isEmpty() ) throw new DataNotException("question not found");
 
         return oq.get();
     }
 
     public Question create(String subject, String content) {
         Question q = new Question();
-
         q.setSubject(subject);
         q.setContent(content);
         q.setCreateDate(LocalDateTime.now());
+
         this.questionRepository.save(q);
-
         return q;
-
     }
 }
-

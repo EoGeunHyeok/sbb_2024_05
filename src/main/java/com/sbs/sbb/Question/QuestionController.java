@@ -10,22 +10,24 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@RequestMapping("/question") // 앞에 고정적으로 들어가는 단어를 이렇게 지정해주면 편함
+
+@RequestMapping("/question")
 @Controller
 @RequiredArgsConstructor
-// @Validated 컨트롤러 부분에서는 생력 가능
+//@Validated 컨트롤러에서는 이 부분 생략가능
 public class QuestionController {
-   private final QuestionService questionService;
-
+    private final QuestionService questionService;
 
     @GetMapping("/list")
-    public String list(Model model){
-        List<Question> questionList = this.questionService.getlist();
+    public String list(Model model) {
+        List<Question> questionList = this.questionService.getList();
         model.addAttribute("questionList", questionList);
+
         return "question_list";
     }
-    @GetMapping("/detail/{id}") // -> question이 접두어임
-    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm){
+
+    @GetMapping("/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerFrom) {
         Question q = this.questionService.getQuestion(id);
 
         model.addAttribute("question", q);
@@ -34,28 +36,28 @@ public class QuestionController {
     }
 
     @GetMapping("/create")
-    // QuestionForm 변수는 model.addAttribute 없이 바로 뷰에서 접근할 수 있다.
-    // QuestionForm questionForm 써주는 이유 : question_form.html 에서 questionForm 변수가 없으면 실행이 되지 않는다.
-    // 빈 객체라도 만들어 둔다.
-    public String Create(QuestionForm questionForm) {
+    // QuestionFrom 변수는 model.addAttribute 없이 바로 뷰에서 접근할 수 있다.
+    // QuestionFrom questionForm 써주는 이유 : question_form.html에서  questionForm 변수가 없으면 실행이 안되기 때문에
+    // 빈 객체라도 만든다.
+    // public String create(Model modle) {
+    public String create(QuestionForm questionFrom) {
+//        model.addAttribute("questionFrom", new QuestionForm());
+
         return "question_form";
     }
 
-
     @PostMapping("/create")
-       // QuestionForm 값을 바인딩 할 대 유효성 체크를 해람! -> DB에 올라가기 직전에
-        public String questionCreate(@Valid QuestionForm questionForm,  BindingResult bindingResult ){
-        //public String questionCreate(@RequestParam(value="subject") String subject, @RequestParam(value="content") String content)
-        if( bindingResult.hasErrors()){
+    // QuestionForm 값을 바인딩 할 때 유효성 체크를 해라!
+    // QuestionFrom 변수는 model.addAttribute 없이 바로 뷰에서 접근할 수 있다.
+    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+        if ( bindingResult.hasErrors() ) {
             // question_form.html 실행
-            // 다시 작성하라는 의미로 응답에 폼을 넣어서 돌려보냄
+            // 다시 작성하라는 의미로 응답에 폼을 싫어서 보냄
             return "question_form";
         }
-        Question q = this.questionService.create(questionForm.getSubject(), questionForm.getSubject());
+
+        Question q = this.questionService.create(questionForm.getSubject(), questionForm.getContent());
 
         return "redirect:/question/list";
-
     }
-
 }
-
