@@ -40,6 +40,7 @@ public class QuestionController {
         return "question_form";
     }
 
+
     @PostMapping("/create")
        // QuestionForm 값을 바인딩 할 대 유효성 체크를 해람! -> DB에 올라가기 직전에
         public String questionCreate(@Valid QuestionForm questionForm,  BindingResult bindingResult){
