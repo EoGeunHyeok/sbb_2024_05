@@ -53,7 +53,7 @@ class SbbApplicationTests {
 		// 회원 2명 생성
 		userService.create("user1", "user1@test.com", "1234");
 		userService.create("user2", "user2@test.com", "1234");
-		userService.create("황예지", "user@test.com", "1234");
+
 
 		// 질문 1개 생성
 		Question q1 = new Question();
