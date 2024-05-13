@@ -10,6 +10,6 @@ public interface AnswerRepository extends JpaRepository<Answer, Integer> {
     @Transactional
     @Modifying
     @Query(value="ALTER TABLE answer AUTO_INCREMENT = 1", nativeQuery = true)
-    void createAutoIncrement();
+    void clearAutoIncrement();
 
 }
