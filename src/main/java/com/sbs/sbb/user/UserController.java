@@ -16,6 +16,11 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/login")
+    public String login() {
+        return "login_form";
+    }
+
     @GetMapping("/signup")
     public String signup(UserCreateForm userCreateForm) {
         return "signup_form";
@@ -45,10 +50,6 @@ public class UserController {
             bindingResult.reject("signupFailed", e.getMessage());
             return "signup_form";
         }
-
-
-        userService.create(userCreateForm.getUsername(),
-                userCreateForm.getEmail(), userCreateForm.getPassword1());
 
         return "redirect:/";
     }
