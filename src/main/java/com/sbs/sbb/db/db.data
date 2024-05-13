@@ -1,0 +1,21 @@
+DROP DATABASE IF EXISTS `sbb_dev`;
+CREATE DATABASE `sbb_dev`;
+USE  `sbb_dev`;
+
+
+SELECT * FROM question
+ORDER BY create_date DESC;
+
+SELECT * FROM question;
+SELECT * FROM answer;
+
+DELETE FROM question
+WHERE id = 301 ;
+
+INSERT INTO answer;
+
+SELECT *FROM site_user;
+
+
+
+

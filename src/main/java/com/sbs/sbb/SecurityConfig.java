@@ -14,7 +14,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()) // /**는  모든 접속 허용
+                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()) // "/**(페이지 주소)" 는  모든 접속 허용
         ;
         return http.build();
     }
