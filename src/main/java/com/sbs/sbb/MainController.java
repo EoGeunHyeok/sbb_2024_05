@@ -6,15 +6,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
-    @GetMapping("/com/sbs/sbb")
-    @ResponseBody
+    @GetMapping("/sbb")
     public String index() {
-
-        return "방가방가!!" ;
+        return "list";
     }
+
     @GetMapping("/")
     public String root() {
+        return "redirect:/question/list";
+    }
 
-        return "redirect:/question/list" ;
+    @GetMapping("/test2")
+    public String test2() {
+        return "테스트";
     }
 }
