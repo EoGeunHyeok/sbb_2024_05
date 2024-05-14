@@ -2,9 +2,11 @@ package com.sbs.sbb;
 
 import com.sbs.sbb.Answer.Answer;
 import com.sbs.sbb.Answer.AnswerRepository;
+import com.sbs.sbb.Answer.AnswerService;
 import com.sbs.sbb.Question.Question;
 import com.sbs.sbb.Question.QuestionRepository;
 import com.sbs.sbb.Question.QuestionService;
+import com.sbs.sbb.user.SiteUser;
 import com.sbs.sbb.user.UserRepository;
 import com.sbs.sbb.user.UserService;
 import jakarta.transaction.Transactional;
@@ -29,6 +31,7 @@ class SbbApplicationTests {
 	private QuestionService questionService;
 	@Autowired
 	private UserService userService;
+	private AnswerService answerService;
 	@Autowired
 	private QuestionRepository questionRepository;
 	@Autowired
@@ -52,41 +55,29 @@ class SbbApplicationTests {
 		userRepository.clearAutoIncrement();
 
 		// 회원 2명 생성
-		userService.create("user1", "user1@test.com", "1234");
-		userService.create("user2", "user2@test.com", "1234");
+		SiteUser user1 = userService.create("user1", "user1@test.com", "1234");
+		SiteUser user2 = userService.create("user2", "user2@test.com", "1234");
+		SiteUser user3 = userService.create("황예지", "user3@test.com", "1234");
 
 
 		// 질문 1개 생성
-		Question q1 = new Question();
-		q1.setSubject("sbb가 무엇인가요?");
-		q1.setContent("sbb에 대해서 알고 싶습니다.");
-		q1.setCreateDate(LocalDateTime.now());
-		questionRepository.save(q1);  // 첫번째 질문 저장
+		Question q1 = questionService.create("있지" , "개이뿌덩", user1);
 
 		// 질문 1개 생성
-		Question q2 = new Question();
-		q2.setSubject("스프링부트 모델 질문입니다.");
-		q2.setContent("id는 자동으로 생성되나요?");
-		q2.setCreateDate(LocalDateTime.now());
-		questionRepository.save(q2);  // 두번째 질문 저장
+		Question q2 = questionService.create("집에" , "가고싶어요", user2);
 
 		// 답변 1개 생성
-		Answer a1 = new Answer();
-		a1.setContent("네. 자동으로 생성됩니다.");
-		a1.setQuestion(q2);
-		a1.setCreateDate(LocalDateTime.now());
-		answerRepository.save(a1);  // 첫번째 답변 저장
+		Answer a1 = answerService.create(q1, "인정합니다!.", user2);
 	}
 
 	@Test
 	@DisplayName("데이터 저장")
 	void t001() {
 		// 질문 1개 생성
-		Question q = new Question();
-		q.setSubject("세계에서 가장 부유한 국가가 어디인가요?");
-		q.setContent("알고 싶습니다.");
-		q.setCreateDate(LocalDateTime.now());
-		questionRepository.save(q);
+	SiteUser user2 = userService
+
+		Question q1 = questionService.create("세계에서 가장 부유한 국가가 어디인가요?" , "알고 싶습니다.", );
+
 
 		assertEquals("세계에서 가장 부유한 국가가 어디인가요?", questionRepository.findById(3).get().getSubject());
 	}
@@ -245,6 +236,8 @@ class SbbApplicationTests {
 	@Test
 	@DisplayName("대량 테스트 데이터 만들기")
 	void t012() {
+		SiteUser user1 = userService.getUser("user1");
+
 		for ( int i = 1; i <= 300; i++ ) {
 			String subject = String.format("테스트 데이터 입니다.:[%03d]", i);
 			String content = "내용무";
@@ -256,6 +249,8 @@ class SbbApplicationTests {
 	@Test
 	@DisplayName("스트림 버전 데이터 밀어넣기")
 	void t013() {
+		SiteUser user1 = userService.getUser("user1");
+
 		IntStream.rangeClosed(3, 300)
 				.forEach(no -> questionService.create("테스트 제목 입니다. %d".formatted(no),"테스트 내용입니다. %d".formatted(no), null));
 	}
