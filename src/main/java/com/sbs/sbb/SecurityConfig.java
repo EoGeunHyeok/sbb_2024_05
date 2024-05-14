@@ -31,11 +31,13 @@ public class SecurityConfig {
                         // 시큐리티에게 우리가 만든 로그인 페이지 url을 알려준다
                         // 만약 이걸 하지 않으면 기본적으로 로그인 페이지 url은 "/login" 이다.
                         .loginPage("/user/login")
-                        // POST
-                        // 시큐리티에게 로그인 폼 처리 url을 알려준다.
-                        .loginProcessingUrl("/user/login")
                         .defaultSuccessUrl("/"))
-        ;
+                .logout(
+                        logout -> logout
+                                .logoutUrl("/user/logout")
+                                .logoutSuccessUrl("/")
+                                .invalidateHttpSession(true) // 로그아웃하면 세션이 사라지게 함
+                );
         return http.build();
     }
 
