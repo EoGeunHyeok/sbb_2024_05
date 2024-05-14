@@ -30,4 +30,7 @@ public class Answer {
 
     @ManyToOne // 답변도 여러개 작성 가능하니깜
     private SiteUser author;
+
+
+
 }
