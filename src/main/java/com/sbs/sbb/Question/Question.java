@@ -2,12 +2,15 @@ package com.sbs.sbb.Question;
 
 
 import com.sbs.sbb.Answer.Answer;
+import com.sbs.sbb.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import jakarta.persistence.ManyToOne;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,6 +40,9 @@ public class Question {
     @LazyCollection(LazyCollectionOption.EXTRA)
     //answerList.size(); 함수가 실행 될때 SELECT COUNT 실행
     private List<Answer> answerList;
+
+    @ManyToOne // 게시글도 여러개 작성 가능하니깐
+    private SiteUser author;
 
 
 }

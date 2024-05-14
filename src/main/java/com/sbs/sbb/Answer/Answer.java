@@ -1,6 +1,7 @@
 package com.sbs.sbb.Answer;
 
 import com.sbs.sbb.Question.Question;
+import com.sbs.sbb.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,4 +26,7 @@ public class Answer {
     @ManyToOne // 어쩔수 없이 question 쓰려면 무조건 앞에 써줘야함
     private Question question; // 어디 테이블에 있는지 표시 하는것.
     // private Integer questionId; 이거로도 대신 사용해도 됨.
+
+    @ManyToOne // 답변도 여러개 작성 가능하니깜
+    private SiteUser author;
 }

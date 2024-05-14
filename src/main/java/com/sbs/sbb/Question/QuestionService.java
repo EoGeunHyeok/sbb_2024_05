@@ -1,6 +1,7 @@
 package com.sbs.sbb.Question;
 
-import com.sbs.sbb.DataNotException;
+import com.sbs.sbb.DataNotFoundException;
+import com.sbs.sbb.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,17 +29,17 @@ public class QuestionService {
         // oq.isPersent() == false
         // !oq.isPresent()
         // oq.isEmpty()
-        if ( oq.isEmpty() ) throw new DataNotException("question not found");
+        if ( oq.isEmpty() ) throw new DataNotFoundException("question not found");
 
         return oq.get();
     }
 
-    public Question create(String subject, String content) {
+    public Question create(String subject, String content, SiteUser user) {
         Question q = new Question();
         q.setSubject(subject);
         q.setContent(content);
         q.setCreateDate(LocalDateTime.now());
-
+        q.setAuthor(user);
         this.questionRepository.save(q);
         return q;
     }
