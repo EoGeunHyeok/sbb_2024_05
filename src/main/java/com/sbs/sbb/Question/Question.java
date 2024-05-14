@@ -31,6 +31,7 @@ public class Question {
     private String content;
 
     private LocalDateTime createDate;
+    private LocalDateTime modifyDate;
 
     // mappedBy Answer 클레스의 question 변수 이름을 적어야함.
     // CascadeType.REMOVE 하면 Question을 삭제를 할때 답변도 함꼐 삭제됨.
