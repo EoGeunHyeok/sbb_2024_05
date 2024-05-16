@@ -54,6 +54,10 @@ public class QuestionService {
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         Specification<Question> spec = search(kw);
 
+        if ( kw == null || kw.trim().length() == 0) {
+            return this.questionRepository.findAll(pageable);
+        }
+
         return questionRepository.findAll(spec, pageable);
     }
     public void modify(Question question, String subject, String content) {
