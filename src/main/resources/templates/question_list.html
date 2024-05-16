@@ -32,7 +32,7 @@
             <td><span th:if="${question.author != null}" th:text="${question.author.username}"></span></td>
             <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
           <td>  <span
-                  th:if="${#lists.size(question.voters) > 0}"
+                  th:if="${#lists.size(question.voters) > -1 }"
                   th:text="  |  ${#lists.size(question.voters)}  |  ">
                     </span>
           </td>
