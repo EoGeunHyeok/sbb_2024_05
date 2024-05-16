@@ -21,7 +21,7 @@
                     <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                     <div class="my-3">
 <!--                        추천-->
-                        <a onclick="if confirm('추천하시겠습니까?')"  th:href="@{|/question/vote/${question.id}|}"
+                        <a onclick="return confirm('추천하시겠습니까?');"  th:href="@{|/question/vote/${question.id}|}"
                            class="recommend btn btn-sm btn-outline-secondary">
                             추천
                             <span class="badge rounded-pill bg-success" th:text="${#lists.size(question.voters)}"></span>
@@ -64,6 +64,13 @@
                 </div>
             </div>
             <div class="my-3">
+                <!--                        추천-->
+                <a onclick="return confirm('추천하시겠습니까?');"  th:href="@{|/answer/vote/${answer.id}|}"
+                   class="recommend btn btn-sm btn-outline-secondary">
+                    추천
+                    <span class="badge rounded-pill bg-success" th:text="${#lists.size(answer.voters)}"></span>
+                </a>
+                <!--                        추천 끝-->
                 <a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-sm btn-outline-secondary"
                    sec:authorize="isAuthenticated()"
                    th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
