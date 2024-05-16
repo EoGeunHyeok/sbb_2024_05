@@ -45,8 +45,11 @@ dependencies {
 	// validation - 유효성 체크
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+	// 마크다운
+	implementation 'org.commonmark:commonmark:0.22.0'
+
 }
 
-tasks.named('test') {
+tasks.named('test') { Task it ->
 	useJUnitPlatform()
 }
