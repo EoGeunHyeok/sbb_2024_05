@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -31,6 +33,15 @@ public class Answer {
     @ManyToOne // 답변도 여러개 작성 가능하니깜
     private SiteUser author;
 
+    @ManyToMany
+    Set<SiteUser> voter;
 
+    @ManyToMany
+    Set<SiteUser> voters = new LinkedHashSet<>();
+    // Linked를 안써도 되지만 사용하면 순서가 보장되기에 사용하는게 좋다
+
+    public void addVoter(SiteUser voter) {
+        voters.add(voter);
+    }
 
 }

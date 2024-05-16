@@ -13,7 +13,10 @@ import jakarta.persistence.ManyToOne;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -46,4 +49,14 @@ public class Question {
     private SiteUser author;
 
 
+//    @ManyToMany
+//    List<SiteUser> voters = new ArrayList<>();
+
+    @ManyToMany
+    Set<SiteUser> voters = new LinkedHashSet<>();
+    // Linked를 안써도 되지만 사용하면 순서가 보장되기에 사용하는게 좋다
+
+    public void addVoter(SiteUser voter) {
+        voters.add(voter);
+    }
 }

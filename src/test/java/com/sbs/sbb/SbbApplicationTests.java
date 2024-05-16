@@ -62,6 +62,7 @@ class SbbApplicationTests {
 		SiteUser user2 = userService.create("user2", "user2@test.com", "1234");
 		SiteUser user3 = userService.create("황예지", "user3@test.com", "1234");
 		SiteUser user4 = userService.create("어근혁", "user4@test.com", "1234");
+		SiteUser user5 = userService.create("박현철", "user5@test.com", "1234");
 
 		// 질문 1개 생성
 		Question q1 = questionService.create("sbb가 무엇인가요?", "sbb에 대해서 알고 싶습니다.", user1);
@@ -71,6 +72,20 @@ class SbbApplicationTests {
 
 		// 답변 1개 생성
 		Answer a1 = answerService.create(q2, "네 자동으로 생성됩니다.", user2);
+
+		// 1번 질문에 2명의 회원이 추천을 한다.
+		q1.addVoter(user1);
+		q1.addVoter(user2);
+		questionRepository.save(q1);
+
+		// 2번 질문에 2명의회원이 추천을 한다.
+		q2.addVoter(user1);
+		q2.addVoter(user2);
+		questionRepository.save(q2);
+
+		a1.addVoter(user1);
+		a1.addVoter(user2);
+		answerRepository.save(a1);
 	}
 
 	@Test
